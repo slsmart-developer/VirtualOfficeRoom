@@ -1,0 +1,213 @@
+{% load static %}
+
+<style>
+  body {
+    margin: 0;
+    font-family: "Lato", sans-serif;
+  }
+  
+  .sidebar {
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    background-color: #f1f1f1;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+  }
+  
+  .sidebar a {
+    display: block;
+    color: black;
+    padding: 16px;
+    text-decoration: none;
+  }
+   
+  .sidebar a.active {
+    background-color: #04AA6D;
+    color: white;
+  }
+  
+  .sidebar a:hover:not(.active) {
+    background-color: #555;
+    color: white;
+  }
+  
+  div.content {
+    margin-left: 200px;
+    padding: 1px 16px;
+    height: 1000px;
+  }
+  
+  @media screen and (max-width: 700px) {
+    .sidebar {
+      width: 100%;
+      height: auto;
+      position: relative;
+    }
+    .sidebar a {float: left;}
+    div.content {margin-left: 0;}
+  }
+  
+  @media screen and (max-width: 400px) {
+    .sidebar a {
+      text-align: center;
+      float: none;
+    }
+  }
+  </style>
+
+  {% comment %} <header class="header">
+  <div class="sidebar">
+    <a class="active" href="{% url 'profiles' %}">Developers</a>
+    <a href="#news">News</a>
+    <a href="#contact">Contact</a>
+    <a href="#about">About</a>
+  </div>
+</header> {% endcomment %}
+
+
+
+ <!-- Header Section -->
+{% comment %} <header class="header"> {% endcomment %}
+
+
+ 
+
+
+    {% comment %} <div class="container container--narrow">
+      <a href="{% url 'profiles' %}" class="header__logo">
+        <img src="{% static 'images/logo.svg' %}" alt="DevSearch Logo" />
+      </a>
+      <nav class="header__nav">
+        <input type="checkbox" id="responsive-menu" />
+        <label for="responsive-menu" class="toggle-menu">
+          <span>Menu</span>
+          <div class="toggle-menu__lines"></div>
+        </label>
+        <ul class="header__menu">
+          <li class="header__menuItem"><a href="{% url 'profiles' %}">Developers</a></li>
+          <li class="header__menuItem"><a href="{% url 'projects' %}">Projects</a></li>
+          
+          
+          
+          {% if request.user.is_authenticated %}
+          <li class="header__menuItem"><a href="{% url 'inbox' %}">Inbox</a></li>
+          <li class="header__menuItem"><a href="{% url 'account' %}">My Account</a></li>
+            <li class="header__menuItem"><a href="{% url 'logout' %}" class="btn btn--sub">Logout</a></li>
+          {% else %}
+            <li class="header__menuItem"><a href="{% url 'login' %}" class="btn btn--sub">Login/Sign Up</a></li>
+          {% endif %}
+
+        </ul>
+      </nav>
+    </div> {% endcomment %}
+
+    {% comment %} <header class="cd-main-header js-cd-main-header">
+      <div class="cd-logo-wrapper">
+        <a href="#0" class="cd-logo"><img src="assets/img/cd-logo.svg" alt="Logo"></a>
+      </div>
+      
+      <div class="cd-search js-cd-search">
+        <form>
+          <input class="reset" type="search" placeholder="Search...">
+        </form>
+      </div>
+    
+      <button class="reset cd-nav-trigger js-cd-nav-trigger" aria-label="Toggle menu"><span></span></button>
+    
+      <ul class="cd-nav__list js-cd-nav__list">
+        <li class="cd-nav__item"><a href="#0">Tour</a></li>
+        <li class="cd-nav__item"><a href="#0">Support</a></li>
+        <li class="cd-nav__item cd-nav__item--has-children cd-nav__item--account js-cd-item--has-children">
+          <a href="#0">
+            <img src="assets/img/cd-avatar.svg" alt="avatar">
+            <span>Account</span>
+          </a>
+      
+          <ul class="cd-nav__sub-list">
+            <li class="cd-nav__sub-item"><a href="#0">My Account</a></li>
+            <li class="cd-nav__sub-item"><a href="#0">Edit Account</a></li>
+            <li class="cd-nav__sub-item"><a href="#0">Logout</a></li>
+          </ul>
+        </li>
+      </ul>
+    </header> <!-- .cd-main-header -->
+
+
+    <main class="cd-main-content">
+    <nav class="cd-side-nav js-cd-side-nav">
+      <ul class="cd-side__list js-cd-side__list">
+        <li class="cd-side__label"><span>Main</span></li>
+        <li class="cd-side__item cd-side__item--has-children cd-side__item--overview js-cd-item--has-children">
+          <a href="#0">Overview</a>
+          
+          <ul class="cd-side__sub-list">
+            <li class="cd-side__sub-item"><a href="#0">All Data</a></li>
+            <li class="cd-side__sub-item"><a href="#0">Category 1</a></li>
+            <li class="cd-side__sub-item"><a href="#0">Category 2</a></li>
+          </ul>
+        </li>
+
+        <li class="cd-side__item cd-side__item--has-children cd-side__item--notifications cd-side__item--selected js-cd-item--has-children">
+          <a href="#0">Notifications<span class="cd-count">3</span></a>
+          
+          <ul class="cd-side__sub-list">
+            <li class="cd-side__sub-item"><a aria-current="page" href="#0">All Notifications</a></li>
+            <li class="cd-side__sub-item"><a href="#0">Friends</a></li>
+            <li class="cd-side__sub-item"><a href="#0">Other</a></li>
+          </ul>
+        </li>
+    
+        <li class="cd-side__item cd-side__item--has-children cd-side__item--comments js-cd-item--has-children">
+          <a href="#0">Comments</a>
+          
+          <ul class="cd-side__sub-list">
+            <li class="cd-side__sub-item"><a href="#0">All Comments</a></li>
+            <li class="cd-side__sub-item"><a href="#0">Edit Comment</a></li>
+            <li class="cd-side__sub-item"><a href="#0">Delete Comment</a></li>
+          </ul>
+        </li>
+      </ul>
+    
+      <ul class="cd-side__list js-cd-side__list">
+        <li class="cd-side__label"><span>Secondary</span></li>
+        <li class="cd-side__item cd-side__item--has-children cd-side__item--bookmarks js-cd-item--has-children">
+          <a href="#0">Bookmarks</a>
+          
+          <ul class="cd-side__sub-list">
+            <li class="cd-side__sub-item"><a href="#0">All Bookmarks</a></li>
+            <li class="cd-side__sub-item"><a href="#0">Edit Bookmark</a></li>
+            <li class="cd-side__sub-item"><a href="#0">Import Bookmark</a></li>
+          </ul>
+        </li>
+
+        <li class="cd-side__item cd-side__item--has-children cd-side__item--images js-cd-item--has-children">
+          <a href="#0">Images</a>
+          
+          <ul class="cd-side__sub-list">
+            <li class="cd-side__sub-item"><a href="#0">All Images</a></li>
+            <li class="cd-side__sub-item"><a href="#0">Edit Image</a></li>
+          </ul>
+        </li>
+    
+        <li class="cd-side__item cd-side__item--has-children cd-side__item--users js-cd-item--has-children">
+          <a href="#0">Users</a>
+          
+          <ul class="cd-side__sub-list">
+            <li class="cd-side__sub-item"><a href="#0">All Users</a></li>
+            <li class="cd-side__sub-item"><a href="#0">Edit User</a></li>
+            <li class="cd-side__sub-item"><a href="#0">Add User</a></li>
+          </ul>
+        </li>
+      </ul>
+    
+      <ul class="cd-side__list js-cd-side__list">
+        <li class="cd-side__label"><span>Action</span></li>
+        <li class="cd-side__btn"><button class="reset" href="#0">+ Button</button></li>
+      </ul>
+    </nav>
+  </main> {% endcomment %}
+{% comment %} </header> {% endcomment %}
+
+

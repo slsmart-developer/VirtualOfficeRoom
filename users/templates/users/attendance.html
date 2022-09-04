@@ -1,0 +1,78 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<!-- Main Section -->
+ <main class="formPage my-xl">
+    <div class="content-box">
+        <div class="formWrapper">
+            <a class="backButton" href=""><i class="im im-angle-left"></i></a>
+            <br>
+
+            attendance
+
+            <form class="form" method="POST">
+               {% csrf_token %}
+
+               {% for field in form %}
+
+               <div class="form__field">
+                   <label for="formInput#text">{{ field.label }} </label>
+                   {{ field }}
+               </div>
+
+               {% endfor %}
+
+               
+                <input class="btn btn--sub btn--lg  my-md" type="submit" value="Submit" />
+
+            </form>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="container"></div>
+    <div class="grid grid--two">
+        <div class="column">
+            <div class="container">
+            <table class="vortable">
+                <tr>
+                  <th>Date</th>
+                  <th>In Time</th>
+                </tr>
+    
+                <!-- {% for log in logs %}
+                <tr>
+                  <td>{{log.date}}</td>
+                  <td>{{log.in_time}}</td>
+                </tr>
+                {% endfor %} -->
+    
+            </table>
+        </div>
+        </div>
+        <div class="column">
+            <div class="container">
+            <table class="vortable">
+                <tr>
+                  <th>Date</th>
+                  <th>Out Time</th>
+                </tr>
+    
+                <!-- {% for log in logs %}
+                <tr>
+                  <td>{{log.date}}</td>
+                  <td>{{log.out_time}}</td>
+                </tr>
+                {% endfor %} -->
+    
+            </table>
+        </div>
+    </div>
+      </div>
+    </div>
+
+</main>
+
+{% endblock content %}

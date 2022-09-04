@@ -1,0 +1,32 @@
+{% extends 'main.html' %}
+
+{% load static %}
+
+{% block content %}
+
+
+  <!-- Main Section -->
+  <main class="inbox my-xl">
+    <div class="content-box">
+      <h3 class="inbox__title">New Meetings(<span>{{ unreadCount }}</span>)</h3>
+      <ul class="messages">
+
+        {% for meeting in meetingRequests %}
+        {% if meeting.is_read == False %}
+        <li class="message message--unread">
+          {% else %}
+          <li class="message">
+        {% endif %}
+          <a href="{% url 'personal-meeting' meeting.id %}">
+            <span class="message__author">{{meeting.name}}</span>
+            <span class="message__subject">{{meeting.title}}</span>
+            <span class="message__date">{{meeting.created}}</span>
+          </a>
+        </li>
+        {% endfor %}
+    
+      </ul>
+    </div>
+  </main>
+
+{% endblock content %}

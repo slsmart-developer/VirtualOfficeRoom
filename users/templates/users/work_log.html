@@ -1,0 +1,65 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<!-- Main Section -->
+ <main class="formPage my-xl">
+    <div class="content-box">
+        <div class="formWrapper">
+            <a class="backButton" href=""><i class="im im-angle-left"></i></a>
+            <br>
+
+            <form class="form" method="POST">
+               {% csrf_token %}
+
+               {% for field in form %}
+
+               <div class="form__field">
+                   <label for="formInput#text">{{ field.label }} </label>
+                   {{ field }}
+               </div>
+
+               {% endfor %}
+
+               {% comment %} {{form.as_p}} {% endcomment %}
+
+             
+
+               
+                <input class="btn btn--sub btn--lg  my-md" type="submit" value="Submit" />
+
+            </form>         
+
+        </div>
+
+        
+
+        
+    </div>
+
+    <hr>
+
+    <div class="container">
+        <table class="vortable">
+            <tr>
+              <th>Date</th>
+              <th>Start Time</th>
+              <th>Work Log</th>
+              <th>End Time</th>
+            </tr>
+
+            {% for log in logs %}
+            <tr>
+              <td>{{log.date}}</td>
+              <td>{{log.start_time}}</td>
+              <td>{{log.worklog}}</td>
+              <td>{{log.end_time}}</td>
+            </tr>
+            {% endfor %}
+
+          </table>
+      </div>
+    
+</main>
+
+{% endblock content %}

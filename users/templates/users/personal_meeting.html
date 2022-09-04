@@ -1,0 +1,22 @@
+{% extends 'main.html' %}
+
+{% load static %}
+
+{% block content %}
+
+  <!-- Main Section -->
+  <main class="messagePage my-xl">
+    <div class="content-box">
+      <div class="message">
+        <a class="backButton" href="{% url 'personal-meeting-inbox' %}"><i class="im im-angle-left"></i></a>
+        <h2 class="message__subject">{{ personal_meeting.subject }}</h4>
+          <a href="{% url 'user-profile' personal_meeting.sender.id  %}" class="message__author">{{ personal_meeting.name }}</a>
+          <p class="message__date">{{ personal_meeting.created }}</p>
+          <div class="message__body">{{ personal_meeting.title|linebreaksbr }}</div>
+          <a href="{{ personal_meeting.meeting_link|linebreaksbr }}" class="message__author">{{ personal_meeting.meeting_link|linebreaksbr }}</a>
+          
+      </div>
+    </div>
+  </main>
+
+{% endblock content %}
