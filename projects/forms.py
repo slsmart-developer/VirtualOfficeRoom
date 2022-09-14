@@ -93,17 +93,17 @@ class TaskRegistrationForm(forms.ModelForm):
         super(TaskRegistrationForm, self).__init__(*args, **kwargs)
         self.fields['project'].widget.attrs['class'] = 'input'
         self.fields['project'].widget.attrs['placeholder'] = 'Project Name'
-        self.fields['task_name'].widget.attrs['class'] = 'form-control'
+        self.fields['task_name'].widget.attrs['class'] = 'input'
         self.fields['task_name'].widget.attrs['placeholder'] = 'Task'
-        self.fields['status'].widget.attrs['class'] = 'form-control'
+        self.fields['status'].widget.attrs['class'] = 'input'
         self.fields['status'].widget.attrs['placeholder'] = 'Status'
-        self.fields['due'].widget.attrs['class'] = 'form-control'
+        self.fields['due'].widget.attrs['class'] = 'input'
         self.fields['due'].widget.attrs['placeholder'] = 'Due type'
-        self.fields['assign'].widget.attrs['class'] = 'form-control'
+        self.fields['assign'].widget.attrs['class'] = 'input'
         self.fields['assign'].widget.attrs['placeholder'] = 'Assign'
-        self.fields['deadline'].widget.attrs['class'] = 'form-control'
+        self.fields['deadline'].widget.attrs['class'] = 'input'
         self.fields['deadline'].widget.attrs['placeholder'] = 'Deadline'
-        self.fields['description'].widget.attrs['class'] = 'form-control'
+        self.fields['description'].widget.attrs['class'] = 'input'
         self.fields['description'].widget.attrs['placeholder'] = 'Describe in detail'
 
 
@@ -161,7 +161,7 @@ class ProjectRegistrationForm(forms.ModelForm):
         self.fields['complete_per'].widget.attrs['placeholder'] = 'Complete %'
         self.fields['description'].widget.attrs['class'] = 'input'
         self.fields['description'].widget.attrs['placeholder'] = 'Type here the project description...'
-        self.fields['assign'].widget.attrs['class'] = 'form-control'
+        self.fields['assign'].widget.attrs['class'] = 'input'
 
 class ProjectUpdateForm(forms.ModelForm):
 
@@ -196,7 +196,7 @@ class ProjectUpdateForm(forms.ModelForm):
         self.fields['complete_per'].widget.attrs['placeholder'] = 'Complete %'
         self.fields['description'].widget.attrs['class'] = 'input'
         self.fields['description'].widget.attrs['placeholder'] = 'Type here the project description...'
-        self.fields['assign'].widget.attrs['class'] = 'form-control'
+        self.fields['assign'].widget.attrs['class'] = 'input'
 
 
 class TaskUpdateForm(forms.ModelForm):

@@ -52,7 +52,7 @@
             <tr>
               <td>{{log.date}}</td>
               <td>{{log.start_time}}</td>
-              <td>{{log.worklog}}</td>
+              <td>{{log.worklog|slice:"60"}}</td>
               <td>{{log.end_time}}</td>
             </tr>
             {% endfor %}
