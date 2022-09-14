@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from django.db.models import Q
 from . models import Profile, Message, Worklog
-from . forms import CustomUserCreationForm, ProfileForm, SkillForm, MessageForm, WorklogForm, AttendanceForm, PersonalMeetingForm
+from . forms import CustomUserCreationForm, ProfileForm, SkillForm, MessageForm, WorklogForm, AttendanceInForm, AttendanceOutForm, PersonalMeetingForm
 from . utils import searchProfiles, paginateProfiles
 # Create your views here.
 
@@ -90,9 +90,13 @@ def userAccount(request):
     profile = request.user.profile
 
     skills = profile.skill_set.all()
-    projects = profile.project_set.all()
+    # projects = profile.project_set.all()
 
-    context = {'profile':profile, 'skills': skills, 'projects': projects}
+    context = {'profile':profile, 'skills': skills}
+
+    # projects = profile.project_set.all()
+
+    # context = {'profile':profile, 'skills': skills, 'projects': projects}
     return render(request, 'users/account.html', context)
 
 
@@ -254,21 +258,50 @@ def createPersonalMeeting(request, pk):
     context = {'recipient': recipient, 'form': form}
     return render(request, 'users/personal_meeting_form.html', context)
 
-
 def attendance(request):
     profile = request.user.profile
-    form = AttendanceForm()
 
     if request.method == 'POST':
-        form = AttendanceForm(request.POST)
+        form = AttendanceInForm(request.POST)
         if form.is_valid():
             worklog = form.save(commit=False)
             worklog.owner = profile
             worklog.save()
-            messages.success(request, "Attendance was added successfully")
+            messages.success(request, "IN Attendance was added successfully")
+            return redirect('attendance')
+  
+    return render(request, 'users/attendance.html')
+
+def attendanceIn(request):
+    profile = request.user.profile
+    form = AttendanceInForm()
+
+    if request.method == 'POST':
+        form = AttendanceInForm(request.POST)
+        if form.is_valid():
+            worklog = form.save(commit=False)
+            worklog.owner = profile
+            worklog.save()
+            messages.success(request, "IN Attendance was added successfully")
             return redirect('attendance')
 
-    context = {'form':form}
+    context = {'in_form':form}
+    return render(request, 'users/attendance.html', context)
+
+def attendanceOut(request):
+    profile = request.user.profile
+    form = AttendanceOutForm()
+
+    if request.method == 'POST':
+        form = AttendanceOutForm(request.POST)
+        if form.is_valid():
+            worklog = form.save(commit=False)
+            worklog.owner = profile
+            worklog.save()
+            messages.success(request, "OUT Attendance was added successfully")
+            return redirect('attendance')
+
+    context = {'out_form':form}
     return render(request, 'users/attendance.html', context)
 
 def worklog(request):

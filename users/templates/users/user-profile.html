@@ -92,7 +92,7 @@
             <div class="grid grid--two">
 
 
-            {% for project in profile.project_set.all %}    
+            {% comment %} {% for project in profile.project_set.all %}    
               <div class="column">
                 <div class="card project">
                   <a href="{% url 'project' project.id %}" class="project">
@@ -117,7 +117,7 @@
                   </a>
                 </div>
               </div>
-            {% endfor %}
+            {% endfor %} {% endcomment %}
               
 
          

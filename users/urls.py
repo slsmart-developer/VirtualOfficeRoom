@@ -28,5 +28,7 @@ urlpatterns = [
     path('create-personal-meeting/<str:pk>/', views.createPersonalMeeting, name="create-personal-meeting"),
 
     path('attendance/', views.attendance, name="attendance"),
+    path('attendance-in/', views.attendanceIn, name="attendance-in"),
+    path('attendance-out/', views.attendanceOut, name="attendance-out"),
     path('work-log/', views.worklog, name="work-log"),
 ]

@@ -20,7 +20,6 @@ class Profile(models.Model):
     )
 
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
-    roles = models.CharField(max_length=50, choices = ROLES, null=True)
     name = models.CharField(max_length=200, blank=True, null=True)
     email = models.EmailField(max_length=500, blank=True, null=True)
     username = models.CharField(max_length=200, blank=True, null=True)
@@ -100,14 +99,22 @@ class Worklog(models.Model):
         return str(self.date)
 
 
-class Attendance(models.Model):
+class AttendanceIn(models.Model):
     owner = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True, blank=True)
     in_date = models.DateTimeField(blank=True, null=True)
     in_time =  models.TimeField(blank=True, null=True)
+    created = models.DateTimeField(auto_now_add=True)
+    id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
+
+    def __str__(self):
+        return str(self.in_date)
+
+class AttendanceOut(models.Model):
+    owner = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True, blank=True)
     out_date = models.DateTimeField(blank=True, null=True)
     out_time =  models.TimeField(blank=True, null=True)
     created = models.DateTimeField(auto_now_add=True)
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
 
     def __str__(self):
-        return str(self.in_date)
+        return str(self.out_date)

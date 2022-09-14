@@ -30,30 +30,31 @@
     <div class="w3-sidebar w3-bar-block w3-card w3-animate-left" style="display:none" id="mySidebar">
         <button class="w3-bar-item w3-button w3-large"
         onclick="w3_close()">Close &times;</button>
+
         <a href="{% url 'profiles' %}" class="w3-bar-item w3-button">Home</a>
-        <a href="{% url 'projects' %}" class="w3-bar-item w3-button">Projects</a>
-        <a href="{% url 'attendance' %}" class="w3-bar-item w3-button">Attendance</a>
+        <a href="{% url 'core:dashboard' %}" class="w3-bar-item w3-button">Dashboard</a>
+        <a href="{% url 'attendance-in' %}" class="w3-bar-item w3-button">Attendance</a>
         <a href="{% url 'work-log' %}" class="w3-bar-item w3-button">Work Log</a>
 
         <button class="w3-button w3-block w3-left-align" onclick="myAccFunc()">
-          Accordion <i class="fa fa-caret-down"></i>
+          Projects menu <i class="fa fa-caret-down"></i>
           </button>
           <div id="demoAcc" class="w3-hide w3-white w3-card">
-            <a href="#" class="w3-bar-item w3-button">Link</a>
-            <a href="#" class="w3-bar-item w3-button">Link</a>
+            <a href="{% url 'projects:projects' %}" class="w3-bar-item w3-button">Project details</a>
+            <a href="{% url 'views:project-view' %}" class="w3-bar-item w3-button">All Projects</a>
+            <a href="{% url 'views:users-view' %}" class="w3-bar-item w3-button">Mine</a>
           </div>
+
+          
+          <a href="{% url 'projects:create-task' %}" class="w3-bar-item w3-button">Create Task</a>
 
       <button class="w3-button w3-block w3-left-align" onclick="usersFunc()">
           Users <i class="fa fa-caret-down"></i>
           </button>
           <div id="usersAcc" class="w3-hide w3-white w3-card">
-            <a href="#" class="w3-bar-item w3-button">All Users</a>
+            <a href="{% url 'profiles' %}" class="w3-bar-item w3-button">All Users</a>
             <a href="{% url 'register' %}" class="w3-bar-item w3-button">Create User</a>
           </div>
-
-      <a href="#" class="w3-bar-item w3-button">Link 1</a>
-      <a href="#" class="w3-bar-item w3-button">Link 2</a>
-      <a href="#" class="w3-bar-item w3-button">Link 3</a>
 
 
         {% if request.user.is_authenticated %}
@@ -64,7 +65,7 @@
           <div id="messageAcc" class="w3-hide w3-white w3-card">
             <a href="{% url 'personal-meeting-inbox' %}" class="w3-bar-item w3-button">Meetings</a>
             <a href="{% url 'inbox' %}" class="w3-bar-item w3-button">Inbox</a>
-            <a href="#" class="w3-bar-item w3-button">Message to All</a>
+            {% comment %} <a href="#" class="w3-bar-item w3-button">Message to All</a> {% endcomment %}
           </div>
 
         {% comment %} <a href="{% url 'inbox' %}" class="w3-bar-item w3-button">Inbox</a> {% endcomment %}
@@ -86,17 +87,7 @@
     </ul>
     {% endif %} -->
 
-    {% if messages %}
-
-    {% for message in messages %}
-    <div class="alert  alert--{{message.tags}}">
-        <p class="alert__message">{{message}}</p>
-        <button class="alert__close">x</button>
-    </div>
-
-    {% endfor %}
-
-    {% endif %}
+   
 
     <div id="main">
 
@@ -105,6 +96,39 @@
           <div class="w3-container">
           </div>
         </div>
+
+         <!-- ----------------------------------------- Modal content -------------------------------------->
+    <!-- Trigger/Open The Modal -->
+{% comment %} <button id="myBtn">Open Modal</button> {% endcomment %}
+
+<!-- The Modal -->
+{% comment %} <div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <p>It's lunch time..</p>
+  </div>
+
+</div> {% endcomment %}
+
+
+
+<!-- ----------------------------------------- Modal content -------------------------------------->
+
+
+{% if messages %}
+
+{% for message in messages %}
+<div class="alert  alert--{{message.tags}}">
+    <p class="alert__message">{{message}}</p>
+    <button class="alert__close">x</button>
+</div>
+
+{% endfor %}
+
+{% endif %}
+
 
     {% block content %}
 
@@ -118,6 +142,37 @@
 <script src="{% static 'js/main.js' %}"></script>
 
 <script>
+
+  var modal = document.getElementById("myModal");
+    
+  // Get the button that opens the modal
+  {% comment %} var btn = document.getElementById("myBtn"); {% endcomment %}
+  
+  // Get the <span> element that closes the modal
+  var span = document.getElementsByClassName("close")[0];
+
+  var d = new Date();
+  var time = d.getHours();
+
+  console.log(time)
+
+  if (time > 12 && time < 13 ) {
+    modal.style.display = "block";
+  }
+  {% comment %} if (time > 12) {
+    document.write("<b>Good afternoon!</b>");
+  }
+  if (time == 12) {
+    document.write("<b>Go eat lunch!</b>");
+  } {% endcomment %}
+
+  span.onclick = function() {
+    modal.style.display = "none";
+  }
+
+
+
+
     function w3_open() {
       document.getElementById("main").style.marginLeft = "18%";
       document.getElementById("mySidebar").style.width = "18%";

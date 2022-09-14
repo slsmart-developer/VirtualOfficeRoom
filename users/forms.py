@@ -2,7 +2,7 @@ from django import forms
 from django.forms import ModelForm, widgets
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from . models import Profile, Skill, Message, Worklog, Attendance, PersonalMeeting
+from . models import AttendanceIn, AttendanceOut, Profile, Skill, Message, Worklog, AttendanceIn, AttendanceOut, PersonalMeeting
 from .widgets import DatePickerInput, TimePickerInput, DateTimePickerInput
 
 class CustomUserCreationForm(UserCreationForm):
@@ -25,7 +25,6 @@ class ProfileForm(ModelForm):
         model = Profile
         fields = [
             'name', 
-            'roles',
             'email', 
             'username', 
             'location', 
@@ -98,8 +97,6 @@ class WorklogForm(ModelForm):
 
         # for name, field in self.fields.items():
             # field.widget.attrs.update({'class': 'input'})
-           
-        
 
         self.fields['date'] = forms.DateField(widget=DatePickerInput)
         self.fields['start_time'] = forms.TimeField(widget=TimePickerInput)
@@ -107,17 +104,26 @@ class WorklogForm(ModelForm):
         self.fields['end_time'] = forms.TimeField(widget=TimePickerInput)
             
             
-class AttendanceForm(ModelForm):
+class AttendanceInForm(ModelForm):
     class Meta:
-        model = Attendance
+        model = AttendanceIn
         fields = '__all__'
         exclude = ['owner']
 
     def __init__(self, *args, **kwargs):
-        super(AttendanceForm, self).__init__(*args, **kwargs)
+        super(AttendanceInForm, self).__init__(*args, **kwargs)
 
         self.fields['in_date'] = forms.DateField(widget=DatePickerInput)
         self.fields['in_time']= forms.TimeField(widget=TimePickerInput)
+
+class AttendanceOutForm(ModelForm):
+    class Meta:
+        model = AttendanceOut
+        fields = '__all__'
+        exclude = ['owner']
+
+    def __init__(self, *args, **kwargs):
+        super(AttendanceOutForm, self).__init__(*args, **kwargs)
+
         self.fields['out_date'] = forms.DateField(widget=DatePickerInput)
         self.fields['out_time']= forms.TimeField(widget=TimePickerInput)
-            
