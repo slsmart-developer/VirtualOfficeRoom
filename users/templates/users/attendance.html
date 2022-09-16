@@ -14,7 +14,9 @@
 
               <div class="row">
                 <div class="column" style="margin:0 auto;">
-
+                  {% comment %} <input type="button" href={% url 'attendance-in' %} onclick="myFunction()" class="btn btn--sub btn--lg  my-md" value="IN" /> {% endcomment %}
+                  <a href={% url 'attendance-in' %} ><button onclick="myFunction()" class="btn btn--sub btn--lg">Click me</button></a>
+                  <div id="myDIV">
                   <form class="form" method="POST">
                     {% csrf_token %}
 
@@ -33,9 +35,10 @@
 
                   </form>
                 </div>
+                </div>
 
                 <div class="column" style="margin:0 auto;">
-
+                  <a href={% url 'attendance-out' %} class="btn btn--sub btn--lg">OUT</a>
                   <form class="form" method="POST">
                     {% csrf_token %}
 
@@ -48,7 +51,6 @@
 
                     {% endfor %}
 
-                    
                     <input class="btn btn--sub btn--lg  my-md" type="submit" value="Submit" />
 
                   </form>
@@ -79,12 +81,12 @@
                   <th>In Time</th>
                 </tr>
     
-                <!-- {% for log in logs %}
+                {% for log_attendance_in in logs_attendance_in %}
                 <tr>
-                  <td>{{log.date}}</td>
-                  <td>{{log.in_time}}</td>
+                  <td>{{log_attendance_in.in_date}}</td>
+                  <td>{{log_attendance_in.in_time}}</td>
                 </tr>
-                {% endfor %} -->
+                {% endfor %}
     
             </table>
           </div>
@@ -97,12 +99,12 @@
                   <th>Out Time</th>
                 </tr>
     
-                <!-- {% for log in logs %}
+                {% for log_attendance_out in logs_attendance_out %}
                 <tr>
-                  <td>{{log.date}}</td>
-                  <td>{{log.out_time}}</td>
+                  <td>{{log_attendance_out.out_date}}</td>
+                  <td>{{log_attendance_out.out_time}}</td>
                 </tr>
-                {% endfor %} -->
+                {% endfor %}
     
             </table>
           </div>
@@ -112,5 +114,17 @@
     </div>
 
 </main>
+
+<script>
+  function myFunction() {
+    var x = document.getElementById("myDIV");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+  }
+
+</script>
 
 {% endblock content %}

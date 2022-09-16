@@ -30,7 +30,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY='django-insecure-7(bwt)tm#=e*g7r-3pgrt*eurj1_a6=-@uj6$z+5m74&a^r#k%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -69,7 +69,9 @@ ROOT_URLCONF = 'vor_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates'),
+            ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -137,12 +139,16 @@ EMAIL_HOST_PASSWORD = 'wjuumqlnsjlltepy'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 MEDIA_URL = '/images/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'), 
+    BASE_DIR / 'static'
 ]
+
+# STATICFILES_DIRS = [
+#     os.path.join(BASE_DIR, 'static'), 
+# ]
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
@@ -164,7 +170,7 @@ JAZZMIN_SETTINGS = {
     "site_brand": "VOR",
 
     # Logo to use for your site, must be present in static files, used for brand on top left
-    "site_logo": "img/logos/vor.png",
+    # "site_logo": "img/logos/vor.png",
 
     # Logo to use for your site, must be present in static files, used for login form logo (defaults to site_logo)
     "login_logo": None,
@@ -179,32 +185,16 @@ JAZZMIN_SETTINGS = {
     "site_icon": None,
 
     # Welcome text on the login screen
-    "welcome_sign": "Welcome to the library",
+    "welcome_sign": "Welcome to the Virtual Office Room",
 
     # Copyright on the footer
-    "copyright": "Acme Library Ltd",
+    "copyright": "Virtual Office Room",
 
     # The model admin to search from the search bar, search bar omitted if excluded
     "search_model": "auth.User",
 
     # Field name on user model that contains avatar ImageField/URLField/Charfield or a callable that receives the user
     "user_avatar": None,
-
-    ############
-    # Top Menu #
-    ############
-
-   
-
-    #############
-    # User Menu #
-    #############
-
-    # Additional links to include in the user menu on the top right ("app" url type is not allowed)
-    "usermenu_links": [
-        {"name": "Support", "url": "https://github.com/farridav/django-jazzmin/issues", "new_window": True},
-        {"model": "auth.user"}
-    ],
 
     #############
     # Side Menu #
@@ -216,12 +206,7 @@ JAZZMIN_SETTINGS = {
     # Whether to aut expand the menu
     "navigation_expanded": True,
 
-   
-   
-
-   
-
-  
-
-   
 }
+
+if os.getcwd() == '/app':
+    DEBUG = False
