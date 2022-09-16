@@ -260,6 +260,8 @@ def createPersonalMeeting(request, pk):
 
 def attendance(request):
     profile = request.user.profile
+    logs_attendance_in = profile.attendancein_set.all()
+    logs_attendance_out = profile.attendanceout_set.all()
 
     if request.method == 'POST':
         form = AttendanceInForm(request.POST)
@@ -270,11 +272,13 @@ def attendance(request):
             messages.success(request, "IN Attendance was added successfully")
             return redirect('attendance')
   
-    return render(request, 'users/attendance.html')
+    context = {'logs_attendance_in':logs_attendance_in, 'logs_attendance_out':logs_attendance_out}
+    return render(request, 'users/attendance.html', context)
 
 def attendanceIn(request):
     profile = request.user.profile
     logs_attendance_in = profile.attendancein_set.all()
+    logs_attendance_out = profile.attendanceout_set.all()
     form = AttendanceInForm()
 
     if request.method == 'POST':
@@ -286,11 +290,12 @@ def attendanceIn(request):
             messages.success(request, "IN Attendance was added successfully")
             return redirect('attendance')
 
-    context = {'in_form':form, 'logs_attendance_in':logs_attendance_in}
+    context = {'in_form':form, 'logs_attendance_in':logs_attendance_in, 'logs_attendance_out':logs_attendance_out}
     return render(request, 'users/attendance.html', context)
 
 def attendanceOut(request):
     profile = request.user.profile
+    logs_attendance_in = profile.attendancein_set.all()
     logs_attendance_out = profile.attendanceout_set.all()
     form = AttendanceOutForm()
 
@@ -303,7 +308,7 @@ def attendanceOut(request):
             messages.success(request, "OUT Attendance was added successfully")
             return redirect('attendance')
 
-    context = {'out_form':form, 'logs_attendance_out':logs_attendance_out}
+    context = {'out_form':form, 'logs_attendance_in':logs_attendance_in, 'logs_attendance_out':logs_attendance_out}
     return render(request, 'users/attendance.html', context)
 
 def worklog(request):

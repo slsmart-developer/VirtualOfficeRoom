@@ -15,7 +15,7 @@
               <div class="row">
                 <div class="column" style="margin:0 auto;">
                   {% comment %} <input type="button" href={% url 'attendance-in' %} onclick="myFunction()" class="btn btn--sub btn--lg  my-md" value="IN" /> {% endcomment %}
-                  <a href={% url 'attendance-in' %} ><button onclick="myFunction()" class="btn btn--sub btn--lg">Click me</button></a>
+                  <a href={% url 'attendance-in' %} class="btn btn--sub btn--lg">IN</a>
                   <div id="myDIV">
                   <form class="form" method="POST">
                     {% csrf_token %}
