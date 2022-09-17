@@ -40,7 +40,7 @@ def logoutUser(request):
     messages.error(request, "User was logged out")
     return redirect('login')
 
-@login_required(login_url="login")
+# @login_required(login_url="login")
 def registerUser(request):
     page = 'register'
     form = CustomUserCreationForm()
@@ -69,7 +69,13 @@ def profiles(request):
 
 def userProfile(request, pk):
     profile = Profile.objects.get(id=pk)
-    context = {'profile': profile}
+
+    topSkills = profile.skill_set.exclude(description__exact="")
+    otherSkills = profile.skill_set.filter(description="")
+
+    context = {'profile': profile, 'topSkills': topSkills,
+               "otherSkills": otherSkills}
+    # context = {'profile': profile}
     return render(request, 'users/user-profile.html', context)
 
 
@@ -242,6 +248,7 @@ def createPersonalMeeting(request, pk):
     context = {'recipient': recipient, 'form': form}
     return render(request, 'users/personal_meeting_form.html', context)
 
+@login_required(login_url="login")
 def attendance(request):
     profile = request.user.profile
     logs_attendance_in = profile.attendancein_set.all()
@@ -259,6 +266,7 @@ def attendance(request):
     context = {'logs_attendance_in':logs_attendance_in, 'logs_attendance_out':logs_attendance_out}
     return render(request, 'users/attendance.html', context)
 
+@login_required(login_url="login")
 def attendanceIn(request):
     profile = request.user.profile
     logs_attendance_in = profile.attendancein_set.all()
@@ -277,6 +285,7 @@ def attendanceIn(request):
     context = {'in_form':form, 'logs_attendance_in':logs_attendance_in, 'logs_attendance_out':logs_attendance_out}
     return render(request, 'users/attendance.html', context)
 
+@login_required(login_url="login")
 def attendanceOut(request):
     profile = request.user.profile
     logs_attendance_in = profile.attendancein_set.all()
@@ -295,6 +304,7 @@ def attendanceOut(request):
     context = {'out_form':form, 'logs_attendance_in':logs_attendance_in, 'logs_attendance_out':logs_attendance_out}
     return render(request, 'users/attendance.html', context)
 
+@login_required(login_url="login")
 def worklog(request):
     profile = request.user.profile
     logs = profile.worklog_set.all()

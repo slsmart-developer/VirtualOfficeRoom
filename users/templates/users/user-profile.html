@@ -65,25 +65,24 @@
               </div>
             {% endfor %}
             
-              <h3 class="devInfo__subtitle">Other Skills</h3>
+              {% comment %} <h3 class="devInfo__subtitle">Other Skills</h3>
               <div class="devInfo__otherSkills">
                
                 {% for skill in otherSkills %}
                     <span class="tag tag--pill tag--sub tag--lg">
                     <small>{{ skill }}</small>
                     </span>
-                {% endfor %}
-                
+                {% endfor %} {% endcomment %}
 
               </div>
             </div>
           </div>
-          <div class="devInfo">
+          {% comment %} <div class="devInfo">
             <h3 class="devInfo__title">Projects</h3>
             <div class="grid grid--two">
 
             </div>
-          </div>
+          </div> {% endcomment %}
         </div>
       </div>
     </div>
