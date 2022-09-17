@@ -18,7 +18,6 @@
               <p class="dev__title">{{profile.short_intro}}</p>
               <p class="dev__location">Based in {{ profile.location }}</p>
 
-
               <ul class="dev__social">
                 {% if profile.social_github %}
                   <li>
@@ -26,12 +25,7 @@
                   </li>
                 {% endif %}
 
-                {% comment %} {% if profile.social_github %}
-                    <li>
-                    <a title="Stackoverflow" href="#" target="_blank"><i class="im im-stackoverflow"></i></a>
-                    </li>
-                {% endif %} {% endcomment %}
-
+               
                 {% if profile.social_twitter %}
                     <li>
                     <a title="Twitter" href="{{ profile.social_twitter }}" target="_blank"><i class="im im-twitter"></i></a>
@@ -51,7 +45,6 @@
                 {% endif %}
               </ul>
 
-              {% comment %} <a href="#" class="btn btn--sub btn--lg">Send Message </a> {% endcomment %}
             </div>
           </div>
         </div>

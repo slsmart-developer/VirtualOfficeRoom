@@ -9,7 +9,7 @@
         <div class="column column--1of3">
           <div class="card text-center">
             <div class="card__body dev">
-              <img class="avatar avatar--xl" src="{{ profile.imageURL }}" /> 
+              <img class="avatar avatar--xl" src="{{ profile.profile_image.url }}" /> 
               <h2 class="dev__name">{{ profile.name }}</h2>
               <p class="dev__title">{{ profile.short_intro }}</p>
               <p class="dev__location">{{ profile.location }}</p>
@@ -20,12 +20,6 @@
                     <a title="Github" href="{{ profile.social_github }}" target="_blank"><i class="im im-github"></i></a>
                     </li>
                 {% endif %}
-
-                {% comment %} {% if profile.social_github %}
-                    <li>
-                    <a title="Stackoverflow" href="#" target="_blank"><i class="im im-stackoverflow"></i></a>
-                    </li>
-                {% endif %} {% endcomment %}
 
                 {% if profile.social_twitter %}
                     <li>
@@ -71,8 +65,6 @@
               </div>
             {% endfor %}
             
-             
-
               <h3 class="devInfo__subtitle">Other Skills</h3>
               <div class="devInfo__otherSkills">
                
@@ -89,37 +81,6 @@
           <div class="devInfo">
             <h3 class="devInfo__title">Projects</h3>
             <div class="grid grid--two">
-
-
-            {% comment %} {% for project in profile.project_set.all %}    
-              <div class="column">
-                <div class="card project">
-                  <a href="{% url 'project' project.id %}" class="project">
-                    <img class="project__thumbnail" src="{{ project.featured_image.url }}" alt="project thumbnail" />
-                    <div class="card__body">
-                      <h3 class="project__title">{{ project.title }}</h3>
-                      <p><a class="project__author" href="{% url 'user-profile' project.owner.id %}">By {{ project.owner.name }}</a></p>
-                      <p class="project--rating">
-                        <span style="font-weight: bold;">{{ project.vote_ratio }}%</span> Postitive
-                        Feedback ({{ project.vote_total }} Vote{{ project.vote_total|pluralize:"s" }})
-                      </p>
-                      <div class="project__tags">
-
-                        {% for tag in project.tags.all %}
-                            <span class="tag tag--pill tag--main">
-                            <small>{{ tag }}</small>
-                            </span>
-                        {% endfor %}
-
-                      </div>
-                    </div>
-                  </a>
-                </div>
-              </div>
-            {% endfor %} {% endcomment %}
-              
-
-         
 
             </div>
           </div>

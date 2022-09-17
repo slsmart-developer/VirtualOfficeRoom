@@ -117,17 +117,17 @@
 <!-- ----------------------------------------- Modal content -------------------------------------->
 
 
-{% if messages %}
+    {% if messages %}
 
-{% for message in messages %}
-<div class="alert  alert--{{message.tags}}">
-    <p class="alert__message">{{message}}</p>
-    <button class="alert__close">x</button>
-</div>
+    {% for message in messages %}
+    <div class="alert  alert--{{message.tags}}">
+        <p class="alert__message">{{message}}</p>
+        <button class="alert__close">x</button>
+    </div>
 
-{% endfor %}
+    {% endfor %}
 
-{% endif %}
+    {% endif %}
 
 
     {% block content %}
@@ -220,6 +220,8 @@
           x.previousElementSibling.className.replace(" vor-gray", "");
         }
       }
+
+
 </script>
 
 </html>

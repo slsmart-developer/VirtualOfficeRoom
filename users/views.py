@@ -3,7 +3,6 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.models import User
-from django.db.models import Q
 from . models import Profile, Message, Worklog
 from . forms import CustomUserCreationForm, ProfileForm, SkillForm, MessageForm, WorklogForm, AttendanceInForm, AttendanceOutForm, PersonalMeetingForm
 from . utils import searchProfiles, paginateProfiles
@@ -41,7 +40,7 @@ def logoutUser(request):
     messages.error(request, "User was logged out")
     return redirect('login')
 
-# @login_required(login_url="login")
+@login_required(login_url="login")
 def registerUser(request):
     page = 'register'
     form = CustomUserCreationForm()
@@ -53,10 +52,7 @@ def registerUser(request):
             user.username = user.username.lower()
             user.save()
             messages.success(request, "User account was created")
-
-            # login(request, user)
             return redirect('register')
-        
         else:
             messages.error(request, "An error has occured during registration")
 
@@ -66,21 +62,13 @@ def registerUser(request):
 @login_required(login_url="login")
 def profiles(request):
     profiles, search_query = searchProfiles(request)
-
     custom_range, profiles = paginateProfiles(request, profiles, 3)
-    
     context = {'profiles': profiles, 'search_query': search_query, 'custom_range': custom_range}
-
     return render(request, 'users/profiles.html', context)
 
 
 def userProfile(request, pk):
     profile = Profile.objects.get(id=pk)
-
-    # topSkills = Profile.skill_set.exclude(description__exact="")
-    # otherSkills = Profile.skill_set.filter(description="")
-
-    # context = {'profile': profile, 'topSkills': topSkills, 'otherSkills': otherSkills}
     context = {'profile': profile}
     return render(request, 'users/user-profile.html', context)
 
@@ -90,13 +78,8 @@ def userAccount(request):
     profile = request.user.profile
 
     skills = profile.skill_set.all()
-    # projects = profile.project_set.all()
 
     context = {'profile':profile, 'skills': skills}
-
-    # projects = profile.project_set.all()
-
-    # context = {'profile':profile, 'skills': skills, 'projects': projects}
     return render(request, 'users/account.html', context)
 
 
@@ -169,6 +152,7 @@ def inbox(request):
     unreadCount = messageRequests.filter(is_read=False).count()
     context = {'messageRequests': messageRequests, 'unreadCount': unreadCount}
     return render(request, 'users/inbox.html', context)
+
 
 @login_required(login_url="login")
 def personalMeetingInbox(request):
@@ -324,8 +308,6 @@ def worklog(request):
             worklog.save()
             messages.success(request, "Worklog was added successfully")
             return redirect('work-log')
-
-    
 
     context = {'form':form, 'logs':logs}
     return render(request, 'users/work_log.html', context)

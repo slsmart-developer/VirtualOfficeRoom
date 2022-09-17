@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 from django.shortcuts import render
 from projects.models import Project, Task
 
@@ -12,6 +11,4 @@ def dashboard(request):
     res["project"] = projects
     res["task"] = task
     res["active_proeject"] = active_proeject
-    # print(active_proeject)
-    # print(res)
     return render(request, "core/dashboard.html", context=res)

@@ -2,7 +2,6 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from . models import Project, Tag
 from django.db.models import Q
 
-
 def paginateProjects(request, projects, results):
     page = request.GET.get('page')
     paginator = Paginator(projects, results)
@@ -29,7 +28,6 @@ def paginateProjects(request, projects, results):
     custom_range = range(leftIndex, rightIndex)
 
     return custom_range, projects
-
 
 
 def searchProjects(request):

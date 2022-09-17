@@ -25,9 +25,6 @@
                 <label for="formInput#text">{{field.label}}</label>
                 {{field}}
 
-                <!-- {% if field.help_text %}
-                <small>{{field.help_text}}</small>
-                {% endif %} -->
 
                 {% for error in field.errors %}
                 <p style="color: red;">{{error}}</p>
@@ -41,13 +38,9 @@
                 <input class="btn btn--sub btn--lg" type="submit" value="Create User" />
             </div>
         </form>
-        {% comment %} <div class="auth__alternative">
-            <p>Already have an Account?</p>
-            <a href="{% url 'login' %}">Log In</a>
-        </div> {% endcomment %}
+      
     </div>
 </div>
-
 
 
 {% else %}
@@ -86,17 +79,9 @@
             </div>
         </form>
 
-        {% comment %} <div class="auth__alternative">
-            <p>Don’t have an Account?</p>
-            <a href="{% url 'register' %}">Sign Up</a>
-        </div> {% endcomment %}
     </div>
 </div>
 
-
 {% endif %}
-
-
-
 
 {% endblock content %}

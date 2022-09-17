@@ -14,7 +14,6 @@
 
               <div class="row">
                 <div class="column" style="margin:0 auto;">
-                  {% comment %} <input type="button" href={% url 'attendance-in' %} onclick="myFunction()" class="btn btn--sub btn--lg  my-md" value="IN" /> {% endcomment %}
                   <a href={% url 'attendance-in' %} class="btn btn--sub btn--lg">IN</a>
                   <div id="myDIV">
                   <form class="form" method="POST">
@@ -27,11 +26,9 @@
                         {{ field }}
                     </div>
 
-                    
                     {% endfor %}
 
-                    <input class="btn btn--sub btn--lg  my-md" type="submit" value="Submit" />
-                    {% comment %} <a href={% url 'attendance-in' %} class="btn btn--sub btn--lg  my-md" value="IN" /> {% endcomment %}
+                    <input  class="btn btn--sub btn--lg  my-md" type="submit" value="Submit" />
 
                   </form>
                 </div>
@@ -60,10 +57,6 @@
           </div>
         <div>
         </div>
-
-        
-  
-
 
       </div>
 

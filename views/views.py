@@ -3,15 +3,9 @@ from projects.models import Project, Task
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
-# def index(request):
-#     print("Views index")
-#     return render(request, 'views/index.html')
-
 
 def project_view(request):
-    # print("Views Project")
     projects = Project.objects.all().order_by("id")
-    # print(projects)
 
     context = {
         'projects' : projects,
@@ -20,7 +14,6 @@ def project_view(request):
 
 @login_required
 def users_view(request):
-    # print("Views User")
     my_projects = Project.objects.filter(assign = request.user.id).order_by("id")
     my_tasks = Task.objects.filter(assign = request.user.id).order_by("id")
 

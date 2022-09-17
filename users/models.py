@@ -2,22 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 import uuid
 
-from django.db.models.signals import post_save, post_delete
-from django.dispatch import receiver
-
-
 class Profile(models.Model):
-
-    ROLES = (
-
-        ('CEO', 'CEO'),
-        ('Director', 'Director'),
-        ('Manager', 'Project Manager'),
-        ('Tech_lead', 'Tech Lead'),
-        ('Senior_developer', 'Senior Developer'),
-        ('Developer', 'Developer'),
-
-    )
 
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
     name = models.CharField(max_length=200, blank=True, null=True)
@@ -38,7 +23,6 @@ class Profile(models.Model):
     def __str__(self):
         return str(self.username)
     
-
 class Skill(models.Model):
     owner = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True, blank=True)
     name = models.CharField(max_length=200, blank=True, null=True)
@@ -48,7 +32,6 @@ class Skill(models.Model):
 
     def __str__(self):
         return str(self.name)
- 
 
 class Message(models.Model):
     sender = models.ForeignKey(Profile, on_delete=models.SET_NULL, null=True, blank=True)
@@ -67,7 +50,6 @@ class Message(models.Model):
     class Meta:
         ordering = ['is_read', '-created']
 
-
 class PersonalMeeting(models.Model):
     sender = models.ForeignKey(Profile, on_delete=models.SET_NULL, null=True, blank=True)
     recipient = models.ForeignKey(Profile, on_delete=models.SET_NULL, null=True, blank=True, related_name="personalmeetings")
@@ -85,7 +67,6 @@ class PersonalMeeting(models.Model):
     class Meta:
         ordering = ['is_read', '-created']
 
-
 class Worklog(models.Model):
     owner = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True, blank=True)
     date = models.DateTimeField(blank=True, null=True)
@@ -97,7 +78,6 @@ class Worklog(models.Model):
 
     def __str__(self):
         return str(self.date)
-
 
 class AttendanceIn(models.Model):
     owner = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True, blank=True)

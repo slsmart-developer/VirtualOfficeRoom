@@ -38,13 +38,11 @@ class ProfileForm(ModelForm):
             'social_website'
             ]
 
-
     def __init__(self, *args, **kwargs):
         super(ProfileForm, self).__init__(*args, **kwargs)
 
         for name, field in self.fields.items():
             field.widget.attrs.update({'class': 'input'})
-
 
 
 class SkillForm(ModelForm):
@@ -88,15 +86,9 @@ class WorklogForm(ModelForm):
         model = Worklog
         fields = '__all__'
         exclude = ['owner']
-        # widgets={
-        #     'date' : forms.DateField(widget=forms.DateField)
-        # }
 
     def __init__(self, *args, **kwargs):
         super(WorklogForm, self).__init__(*args, **kwargs)
-
-        # for name, field in self.fields.items():
-            # field.widget.attrs.update({'class': 'input'})
 
         self.fields['date'] = forms.DateField(widget=DatePickerInput)
         self.fields['start_time'] = forms.TimeField(widget=TimePickerInput)
