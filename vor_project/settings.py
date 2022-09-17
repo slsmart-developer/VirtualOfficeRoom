@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 from pathlib import Path
 import os
 import environ
+import django_heroku
 
 # Initialise environment variables
 env = environ.Env()
@@ -97,19 +98,39 @@ WSGI_APPLICATION = 'vor_project.wsgi.application'
 #     }
 # }
 
+# DATABASES = {
+
+#     'default': {
+
+#         'ENGINE': 'django.db.backends.postgresql',
+
+#         'NAME': 'vor_db',
+
+#         'USER': 'postgres',
+
+#         'PASSWORD': 'sujiPG',
+
+#         'HOST': 'localhost',
+
+#         'PORT': '5432',
+
+#     }
+
+# }
+
 DATABASES = {
 
     'default': {
 
         'ENGINE': 'django.db.backends.postgresql',
 
-        'NAME': 'vor_db',
+        'NAME': 'd12gha4hmq43aj',
 
-        'USER': 'postgres',
+        'USER': 'nelcclhafxyxmm',
 
-        'PASSWORD': 'sujiPG',
+        'PASSWORD': 'd2e8d4901e2c6016bc481e630e2990730eba322ce91ad4c7a0e1a3bcedec04cd',
 
-        'HOST': 'localhost',
+        'HOST': 'ec2-35-168-122-84.compute-1.amazonaws.com',
 
         'PORT': '5432',
 
@@ -172,6 +193,7 @@ STATICFILES_DIRS = [
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+django_heroku.settings(locals())
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
