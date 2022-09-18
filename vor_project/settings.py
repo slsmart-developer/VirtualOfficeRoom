@@ -246,5 +246,5 @@ JAZZMIN_SETTINGS = {
 
 }
 
-if os.getcwd() == '/app':
-    DEBUG = False
+# if os.getcwd() == '/app':
+#     DEBUG = False
